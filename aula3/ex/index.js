@@ -1,0 +1,1 @@
+console.log("Olá, Meu nome é João e estou aprendendo a programar com JavaScript! hoje as".indexOf("João"));

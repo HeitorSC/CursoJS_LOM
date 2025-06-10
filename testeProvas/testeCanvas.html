@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Relógio Analógico com Canvas</title>
+</head>
+<body>
+  <h2 style="text-align:center;">Relógio Analógico</h2>
+  <canvas id="relogio" width="300" height="300" style="display: block; margin: auto; border: 1px solid #000;"></canvas>
+
+  <script>
+    const canvas = document.getElementById("relogio");
+    const ctx = canvas.getContext("2d");
+    const radius = canvas.height / 2;
+
+    ctx.translate(radius, radius); // Move o 0,0 para o centro
+    const relogioRadius = radius * 0.90;
+
+    function desenharRelogio() {
+      desenharFundo(ctx, relogioRadius);
+      desenharNumeros(ctx, relogioRadius);
+      desenharPonteiros(ctx, relogioRadius);
+    }
+
+    function desenharFundo(ctx, radius) {
+      ctx.beginPath();
+      ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+      ctx.fillStyle = "white";
+      ctx.fill();
+
+      ctx.strokeStyle = "#333";
+      ctx.lineWidth = radius * 0.05;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(0, 0, radius * 0.05, 0, 2 * Math.PI);
+      ctx.fillStyle = "#333";
+      ctx.fill();
+    }
+
+    function desenharNumeros(ctx, radius) {
+      ctx.font = radius * 0.15 + "px Arial";
+      ctx.textBaseline = "middle";
+      ctx.textAlign = "center";
+
+      for (let num = 1; num <= 12; num++) {
+        const ang = num * Math.PI / 6;
+        ctx.rotate(ang);
+        ctx.translate(0, -radius * 0.85);
+        ctx.rotate(-ang);
+        ctx.fillText(num.toString(), 0, 0);
+        ctx.rotate(ang);
+        ctx.translate(0, radius * 0.85);
+        ctx.rotate(-ang);
+      }
+    }
+
+    function desenharPonteiros(ctx, radius) {
+      const agora = new Date();
+      let hora = agora.getHours();
+      let minuto = agora.getMinutes();
+      let segundo = agora.getSeconds();
+
+      // hora
+      hora = hora % 12;
+      hora = (hora * Math.PI / 6) + (minuto * Math.PI / (6 * 60)) + (segundo * Math.PI / (360 * 60));
+      desenharPonteiro(ctx, hora, radius * 0.5, radius * 0.07);
+
+      // minuto
+      minuto = (minuto * Math.PI / 30) + (segundo * Math.PI / (30 * 60));
+      desenharPonteiro(ctx, minuto, radius * 0.8, radius * 0.07);
+
+      // segundo
+      segundo = (segundo * Math.PI / 30);
+      desenharPonteiro(ctx, segundo, radius * 0.9, radius * 0.02, "red");
+    }
+
+    function desenharPonteiro(ctx, pos, length, width, color = "#000") {
+      ctx.beginPath();
+      ctx.lineWidth = width;
+      ctx.lineCap = "round";
+      ctx.strokeStyle = color;
+      ctx.moveTo(0, 0);
+      ctx.rotate(pos);
+      ctx.lineTo(0, -length);
+      ctx.stroke();
+      ctx.rotate(-pos);
+    }
+
+    setInterval(desenharRelogio, 1000);
+  </script>
+</body>
+</html>
