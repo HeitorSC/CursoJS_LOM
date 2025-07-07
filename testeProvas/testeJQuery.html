@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste jQuery - Click em parágrafos</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    p { padding: 10px; border: 1px solid #ccc; margin: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <h2>Parágrafos clicáveis</h2>
+
+  <p>Parágrafo 1</p>
+  <p>Parágrafo 2</p>
+  <p>Parágrafo 3</p>
+  <p>Parágrafo 4</p>
+
+  <script>
+    // Código em teste
+    $("p").click(function() {
+      alert("Você clicou em um parágrafo!" + $(this).text());
+      console.log("Clique detectado em:", $(this).text());
+    });
+
+  </script>
+
+</body>
+</html>

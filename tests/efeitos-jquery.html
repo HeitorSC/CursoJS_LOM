@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Efeitos jQuery</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .box { width: 100px; height: 100px; margin: 10px 0; }
+    #caixa1 { background: red; }
+    #caixa2 { background: blue; }
+    #painel { background: green; }
+    #bloco { background: orange; position: relative; }
+    #caixa5 { background: purple; }
+    button { margin-right: 10px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+  <h1>Efeitos do jQuery</h1>
+
+  <h2>1. Mostrar / Ocultar</h2>
+  <button id="esconder">Esconder</button>
+  <button id="mostrar">Mostrar</button>
+  <button id="alternar">Alternar</button>
+  <div id="caixa1" class="box"></div>
+
+  <h2>2. Fade (Desaparecer/Aparecer suavemente)</h2>
+  <button id="sumir">Fade Out</button>
+  <button id="aparecer">Fade In</button>
+  <button id="alternarFade">Fade Toggle</button>
+  <div id="caixa2" class="box"></div>
+
+  <h2>3. Slide (Deslizar para cima/baixo)</h2>
+  <button id="subir">Slide Up</button>
+  <button id="descer">Slide Down</button>
+  <button id="alternarSlide">Slide Toggle</button>
+  <div id="painel" class="box"></div>
+
+  <h2>4. Animação personalizada</h2>
+  <button id="animar">Animar</button>
+  <div id="bloco" class="box"></div>
+
+  <h2>5. Encadeamento de efeitos</h2>
+  <button id="efeitos">Executar Efeitos</button>
+  <div id="caixa5" class="box"></div>
+
+  <script>
+    // Mostrar/Ocultar
+    $("#esconder").click(() => $("#caixa1").hide());
+    $("#mostrar").click(() => $("#caixa1").show());
+    $("#alternar").click(() => $("#caixa1").toggle());
+
+    // Fade
+    $("#sumir").click(() => $("#caixa2").fadeOut());
+    $("#aparecer").click(() => $("#caixa2").fadeIn());
+    $("#alternarFade").click(() => $("#caixa2").fadeToggle());
+
+    // Slide
+    $("#subir").click(() => $("#painel").slideUp());
+    $("#descer").click(() => $("#painel").slideDown());
+    $("#alternarSlide").click(() => $("#painel").slideToggle());
+
+    // Animação personalizada
+    $("#animar").click(() => {
+      $("#bloco").animate({
+        left: '250px',
+        height: '150px',
+        width: '150px',
+        opacity: 0.5
+      }, 1000);
+    });
+
+    // Encadeamento
+    $("#efeitos").click(() => {
+      $("#caixa5")
+        .slideUp(500)
+        .slideDown(500)
+        .fadeOut(500)
+        .fadeIn(500);
+    });
+  </script>
+
+</body>
+</html>

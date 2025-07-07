@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Efeitos jQuery UI</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .box { width: 150px; height: 150px; margin: 10px 0; background: #ccc; text-align: center; line-height: 150px; font-weight: bold; }
+    button { margin: 5px; }
+    #dialog { display: none; }
+  </style>
+</head>
+<body>
+
+  <h1>Interações com jQuery UI</h1>
+
+  <h2>1. Arrastar e Redimensionar</h2>
+  <div id="dragResize" class="box">Arraste ou redimensione</div>
+
+  <h2>2. Caixa de Diálogo</h2>
+  <button id="abrirDialogo">Abrir Diálogo</button>
+  <div id="dialog" title="Mensagem Importante">
+    <p>Este é um alerta dentro de uma caixa de diálogo!</p>
+  </div>
+
+  <h2>3. Acordeão</h2>
+  <div id="acordeao">
+    <h3>Seção 1</h3>
+    <div><p>Conteúdo da seção 1.</p></div>
+    <h3>Seção 2</h3>
+    <div><p>Conteúdo da seção 2.</p></div>
+    <h3>Seção 3</h3>
+    <div><p>Conteúdo da seção 3.</p></div>
+  </div>
+
+  <h2>4. Efeitos Visuais</h2>
+  <button id="explodir">Explodir</button>
+  <button id="bater">Balançar</button>
+  <button id="pular">Pular</button>
+  <div id="efeitoBox" class="box" style="background: coral;">Efeito!</div>
+
+  <script>
+    // Arrastar e redimensionar
+    $("#dragResize").draggable().resizable();
+
+    // Caixa de diálogo
+    $("#dialog").dialog({
+      autoOpen: false,
+      modal: true,
+      buttons: {
+        "Fechar": function () {
+          $(this).dialog("close");
+        }
+      }
+    });
+
+    $("#abrirDialogo").click(() => {
+      $("#dialog").dialog("open");
+    });
+
+    // Acordeão
+    $("#acordeao").accordion();
+
+    // Efeitos visuais
+    $("#explodir").click(() => {
+      $("#efeitoBox").hide("explode", { pieces: 16 }, 1000).show("fade", 1000);
+    });
+
+    $("#bater").click(() => {
+      $("#efeitoBox").effect("shake", { times: 4, distance: 10 }, 800);
+    });
+
+    $("#pular").click(() => {
+      $("#efeitoBox").effect("bounce", { times: 3, distance: 50 }, 800);
+    });
+  </script>
+
+</body>
+</html>
